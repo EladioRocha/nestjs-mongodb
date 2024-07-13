@@ -6,9 +6,7 @@ import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb://nest:sdf3e4sdffdgh3124@173.249.24.190:27018/users?authSource=admin',
-    ),
+    MongooseModule.forRoot('<MONGODB_URI>'),
     UsersModule,
   ],
   controllers: [AppController],
