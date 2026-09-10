@@ -1,3 +1,50 @@
+# nestjs-mongodb
+
+Aplicación NestJS con Mongoose y MongoDB. Los módulos de la aplicación se registran en `src/app.module.ts`; incluye archivos de pruebas unitarias y de extremo a extremo.
+
+## Estructura
+
+- [src](src)
+- [test](test)
+- [.eslintrc.js](.eslintrc.js)
+
+## Preparación y uso
+
+La conexión de Mongoose se configura en `src/app.module.ts`. Prepara una instancia MongoDB de desarrollo antes de iniciar o ejecutar pruebas de integración.
+
+### Raíz del repositorio
+
+Requiere Node.js. Este paquete no fija una versión del runtime; valida compatibilidad con las dependencias antes de actualizarlo.
+
+```sh
+npm ci
+npm run start:dev
+```
+
+Comandos declarados en [package.json](package.json):
+
+| Comando | Acción |
+| --- | --- |
+| `npm run build` | `nest build` |
+| `npm run start` | `nest start` |
+| `npm run start:dev` | `nest start --watch` |
+| `npm run start:debug` | `nest start --debug --watch` |
+| `npm run start:prod` | `node dist/main` |
+| `npm run lint` | `eslint "{src,apps,libs,test}/**/*.ts" --fix` |
+| `npm run test` | `jest` |
+| `npm run test:watch` | `jest --watch` |
+| `npm run test:cov` | `jest --coverage` |
+| `npm run test:debug` | `node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand` |
+| `npm run test:e2e` | `jest --config ./test/jest-e2e.json` |
+
+## Validación y estado
+
+Esta guía se contrastó con el árbol de archivos y los manifiestos del repositorio. No se ha validado una ejecución completa contra servicios externos, bases de datos o hardware. Las versiones y los scripts mostrados describen el código actual; no implican que sus dependencias antiguas sigan siendo compatibles.
+
+## Documentación previa
+
+Se conserva como referencia histórica, incluidas las imágenes y atribuciones originales. Los enlaces a demos y servicios no se han comprobado.
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
