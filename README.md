@@ -1,120 +1,56 @@
-# nestjs-mongodb
+# NestJS and MongoDB — Users CRUD
 
-Aplicación NestJS con Mongoose y MongoDB. Los módulos de la aplicación se registran en `src/app.module.ts`; incluye archivos de pruebas unitarias y de extremo a extremo.
+A **NestJS 10 tutorial application using Mongoose** to create, list, update, and delete users in MongoDB. The users module demonstrates controllers, services, DTOs, schemas, and dependency injection.
 
-## Estructura
+## Setup
 
-- [src](src)
-- [test](test)
-- [.eslintrc.js](.eslintrc.js)
-
-## Preparación y uso
-
-La conexión de Mongoose se configura en `src/app.module.ts`. Prepara una instancia MongoDB de desarrollo antes de iniciar o ejecutar pruebas de integración.
-
-### Raíz del repositorio
-
-Requiere Node.js. Este paquete no fija una versión del runtime; valida compatibilidad con las dependencias antes de actualizarlo.
+Install Node.js, npm, and a development MongoDB instance, then run:
 
 ```sh
 npm ci
+```
+
+In [src/app.module.ts](src/app.module.ts), replace `<MONGODB_URI>` in `MongooseModule.forRoot()` with your local connection URI, for example `mongodb://127.0.0.1:27017/nest_users`. The current application does not load a `.env` file or read a MongoDB environment variable. Keep private credentials out of committed source.
+
+```sh
 npm run start:dev
 ```
 
-Comandos declarados en [package.json](package.json):
+The server listens on port `3000`, configured in [src/main.ts](src/main.ts).
 
-| Comando | Acción |
-| --- | --- |
-| `npm run build` | `nest build` |
-| `npm run start` | `nest start` |
-| `npm run start:dev` | `nest start --watch` |
-| `npm run start:debug` | `nest start --debug --watch` |
-| `npm run start:prod` | `node dist/main` |
-| `npm run lint` | `eslint "{src,apps,libs,test}/**/*.ts" --fix` |
-| `npm run test` | `jest` |
-| `npm run test:watch` | `jest --watch` |
-| `npm run test:cov` | `jest --coverage` |
-| `npm run test:debug` | `node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand` |
-| `npm run test:e2e` | `jest --config ./test/jest-e2e.json` |
+## Users API
 
-## Validación y estado
+| Method | Path | Action |
+| --- | --- | --- |
+| GET | `/users` | List users. |
+| GET | `/users/:id` | Find a user by MongoDB ID. |
+| POST | `/users` | Create a user. |
+| PUT | `/users/:id` | Update and return the updated user. |
+| DELETE | `/users/:id` | Delete a user. |
 
-Esta guía se contrastó con el árbol de archivos y los manifiestos del repositorio. No se ha validado una ejecución completa contra servicios externos, bases de datos o hardware. Las versiones y los scripts mostrados describen el código actual; no implican que sus dependencias antiguas sigan siendo compatibles.
+Example JSON body for creation:
 
-## Documentación previa
-
-Se conserva como referencia histórica, incluidas las imágenes y atribuciones originales. Los enlaces a demos y servicios no se han comprobado.
-
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
-```bash
-$ npm install
+```json
+{"name":"Example User","username":"example","email":"example@example.com","age":25}
 ```
 
-## Running the app
+The create DTO defines `name`, `username`, `email`, and optional `age`. TypeScript declarations alone do not provide runtime request validation. This tutorial does not implement authentication guards for these routes.
 
-```bash
-# development
-$ npm run start
+## Build and tests
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```sh
+npm run build
+npm run start:prod
 ```
 
-## Test
+The build emits `dist`; production startup runs `dist/main`. Available checks include `npm test`, `npm run test:cov`, and `npm run test:e2e`. The generated tests may require configured providers or a test database; they were not run as part of this documentation-only update. `npm run lint` and `npm run format` modify files.
 
-```bash
-# unit tests
-$ npm run test
+## Code map
 
-# e2e tests
-$ npm run test:e2e
+- [src/modules/users/users.controller.ts](src/modules/users/users.controller.ts): HTTP routes.
+- [src/modules/users/users.service.ts](src/modules/users/users.service.ts): Mongoose operations.
+- [src/modules/users/schemas/user.schema.ts](src/modules/users/schemas/user.schema.ts): data schema.
+- [src/modules/users/dto](src/modules/users/dto): request types.
+- [test](test): end-to-end test configuration.
 
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+This repository accompanies the author's NestJS/MongoDB tutorial. Generic Nest framework badges and sponsorship text have been replaced with project-specific instructions. The package declares `UNLICENSED`; upstream Nest licensing does not automatically license this repository.
